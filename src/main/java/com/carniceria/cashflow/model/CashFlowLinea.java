@@ -20,6 +20,7 @@ public class CashFlowLinea {
 	private String subtipo;
 	private String concepto;
 	private double valor;
+	private String familia;
 	
 	
 	public CashFlowLinea() {
@@ -95,6 +96,18 @@ public class CashFlowLinea {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
+
+
+	public String getFamilia() {
+		return familia;
+	}
+
+
+	public void setFamilia(String familia) {
+		this.familia = familia;
+	}
+	
+	
 	
 	
 	

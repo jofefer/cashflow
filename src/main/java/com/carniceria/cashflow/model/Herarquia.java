@@ -14,6 +14,7 @@ public class Herarquia {
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private int id;
 	private String ingresoGasto;
+	private String familia;
 	private String tipo;
 	private String subtipo;
 	
@@ -52,6 +53,16 @@ public class Herarquia {
 	public void setSubtipo(String subtipo) {
 		this.subtipo = subtipo;
 	}
+
+	public String getFamilia() {
+		return familia;
+	}
+
+	public void setFamilia(String familia) {
+		this.familia = familia;
+	}
+	
+	
 	
 	
 }

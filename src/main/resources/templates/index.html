@@ -26,6 +26,10 @@
 	 		Fecha</a>
 	 	</th>
 	 	<th>
+	 	<a th:href="@{'/page/'+${currentPage} + '?sortField=familia&sortDir='+ ${reverseSortDir}}">
+	 		Familia</a>
+	 	</th>
+	 	<th>
 	 	<a th:href="@{'/page/'+${currentPage} + '?sortField=tipo&sortDir='+ ${reverseSortDir}}">
 	 		Tipo</a>
 	 	</th>
@@ -49,6 +53,7 @@
 	 		<td th:text="${linea.id}"></td>
 	 		<td th:text="${linea.ingresoGasto}"></td>
 	 		<td th:text="${linea.date}"></td>
+	 		<td th:text="${linea.familia}"></td>
 	 		<td th:text="${linea.tipo}"></td>
 	 		<td th:text="${linea.subtipo}"></td>
 	 		<td th:text="${linea.concepto}"></td>

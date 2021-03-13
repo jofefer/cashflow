@@ -6,6 +6,7 @@ import java.util.Optional;
 
 
 import com.carniceria.cashflow.model.Herarquia;
+import com.carniceria.cashflow.utils.Pair;
 
 public interface IHerarquiaService {
 
@@ -13,5 +14,8 @@ public interface IHerarquiaService {
 	public Optional<Herarquia> listarId(int id);
 	public int save(Herarquia linea);
 	public void delete(int id);
+	public List<Pair> herarquiaIngGastoFamilia();
+	public List<Pair> herarquiaFamiliaTipo();
+	public List<Pair> herarquiaTipoSubtipo();
 	
 }

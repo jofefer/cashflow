@@ -23,7 +23,7 @@
 						
 						<div class="form-group">
 						<label>Ingreso/Gasto</label>
-						<select th:field="*{ingresoGasto}" data-target="tipo" class="form-control ingresoGasto selectFilter">
+						<select th:field="*{ingresoGasto}" data-target="familia" class="form-control ingresoGasto selectFilter">
 							<option value="-1">Selecciona</option>
 							<option data-ref="gasto" th:value="gasto" th:text="Gasto"></option>
 							<option data-ref="ingreso" th:value="ingreso" th:text="Ingreso"></option>
@@ -31,10 +31,25 @@
 						</div>
 						
 						<div class="form-group">
+							<label>Familia</label>
+							
+							
+							<select th:field="*{familia}"  data-target="tipo" class="form-control familia selectFilter">
+							<option value="-1">Selecciona</option>
+							<option th:each="herarquia : ${herarquiaIngGastoFamilia}"
+									th:data-ref="${herarquia.hijo}"
+									th:data-belong="${herarquia.padre}" 
+									th:value="${herarquia.hijo}"
+									th:text="${herarquia.hijo}"></option>
+						</select>
+							
+						</div>
+						
+						<div class="form-group">
 						<label>Tipo</label>
 						<select th:field="*{tipo}"  data-target="subtipo" class="form-control tipo selectFilter">
 							<option value="-1">Selecciona</option>
-							<option th:each="herarquia : ${herarquia1}"
+							<option th:each="herarquia : ${herarquiaFamiliaTipo}"
 									th:data-ref="${herarquia.hijo}"
 									th:data-belong="${herarquia.padre}" 
 									th:value="${herarquia.hijo}"
@@ -46,7 +61,16 @@
 						
 						<div class="form-group">
 							<label>Subtipo</label>
-							<input th:field="*{subtipo}" type="text" class="form-control"> 
+
+							<select th:field="*{subtipo}" data-target="vacio" class="form-control subtipo selectFilter">
+							<option value="-1">Selecciona</option>
+							<option th:each="herarquia : ${herarquiaTipoSuptipo}"
+									th:data-ref="${herarquia.hijo}"
+									th:data-belong="${herarquia.padre}" 
+									th:value="${herarquia.hijo}"
+									th:text="${herarquia.hijo}"></option>
+						</select>
+							
 						</div>
 						
 						<div class="form-group">

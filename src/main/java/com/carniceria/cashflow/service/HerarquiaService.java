@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.carniceria.cashflow.intefaceService.IHerarquiaService;
 import com.carniceria.cashflow.interfaces.IHerarquia;
 import com.carniceria.cashflow.model.Herarquia;
+import com.carniceria.cashflow.utils.Pair;
 
 
 @Service
@@ -40,6 +41,21 @@ public class HerarquiaService implements IHerarquiaService{
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Pair> herarquiaIngGastoFamilia() {
+		return data.herarquiaIngGastoFamilia();
+	}
+
+	@Override
+	public List<Pair> herarquiaFamiliaTipo() {
+		return data.herarquiaFamiliaTipo();
+	}
+
+	@Override
+	public List<Pair> herarquiaTipoSubtipo() {
+		return data.herarquiaTipoSubtipo();
 	}
 
 

@@ -52,8 +52,14 @@ public class CashFlowController {
 	@RequestMapping("/new")
 	public String agregar(Model model) {
 		model.addAttribute("linea", new CashFlowLinea());
-		List<Herarquia> herarquia = this.herarquiaService.listar();
-		model.addAttribute("herarquia1", ingresoGastoTipo(herarquia));
+		List<Pair> herarquiaIngGastoFamilia = this.herarquiaService.herarquiaIngGastoFamilia();
+		List<Pair> herarquiaFamiliaTipo = this.herarquiaService.herarquiaFamiliaTipo();
+		List<Pair> herarquiaTipoSuptipo = this.herarquiaService.herarquiaTipoSubtipo();
+		
+		
+		model.addAttribute("herarquiaIngGastoFamilia", herarquiaIngGastoFamilia);
+		model.addAttribute("herarquiaFamiliaTipo", herarquiaFamiliaTipo);
+		model.addAttribute("herarquiaTipoSuptipo", herarquiaTipoSuptipo);
 		
 		return "create-form";
 	}
@@ -67,9 +73,15 @@ public class CashFlowController {
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable int id, Model model) {
 		Optional<CashFlowLinea> linea = this.service.listarId(id);
-		List<Herarquia> herarquia = this.herarquiaService.listar();
+		List<Pair> herarquiaIngGastoFamilia = this.herarquiaService.herarquiaIngGastoFamilia();
+		List<Pair> herarquiaFamiliaTipo = this.herarquiaService.herarquiaFamiliaTipo();
+		List<Pair> herarquiaTipoSuptipo = this.herarquiaService.herarquiaTipoSubtipo();
+		
+		
+		model.addAttribute("herarquiaIngGastoFamilia", herarquiaIngGastoFamilia);
+		model.addAttribute("herarquiaFamiliaTipo", herarquiaFamiliaTipo);
+		model.addAttribute("herarquiaTipoSuptipo", herarquiaTipoSuptipo);
 		model.addAttribute("linea", linea);
-		model.addAttribute("herarquia1", ingresoGastoTipo(herarquia));
 		return "create-form";
 	}
 	
@@ -99,7 +111,7 @@ public class CashFlowController {
 			Model model) {
 		
 		int pageSize = 25;
-		System.out.println("estoy en el paginado");
+		
 		Page<CashFlowLinea> page = service.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List<CashFlowLinea> cashFlowList = page.getContent();
 		
@@ -116,27 +128,4 @@ public class CashFlowController {
 	}
 	
 	
-	
-	
-	private List<Pair> ingresoGastoTipo(List<Herarquia> lista){
-		ArrayList<Pair> devolver = new ArrayList<>();
-		for(Herarquia linea: lista) {
-			Pair pair = new Pair(linea.getIngresoGasto(), linea.getTipo());
-			if(!devolver.contains(pair)) {
-				devolver.add(pair);
-			}
-		}
-		return devolver;
-	}
-	
-	private List<Pair> tipoSubtipo(List<Herarquia> lista){
-		ArrayList<Pair> devolver = new ArrayList<>();
-		for(Herarquia linea: lista) {
-			Pair pair = new Pair(linea.getTipo(), linea.getSubtipo());
-			if(!devolver.contains(pair)) {
-				devolver.add(pair);
-			}
-		}
-		return devolver;
-	}
 }

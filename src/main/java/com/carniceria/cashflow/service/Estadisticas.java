@@ -61,6 +61,9 @@ public class Estadisticas implements IEstadisticasService {
 		for(CashFlowLinea linea: lineas) {
 			LocalDate date = LocalDate.parse(linea.getDate());
 			if(date.getYear() == date.now().getYear()) {
+				if(linea.getFamilia().equals("SALARIO")) {
+					continue;
+				}
 				if(linea.getIngresoGasto().equals("ingreso")) {
 					ingreso += linea.getValor();
 				} else {
