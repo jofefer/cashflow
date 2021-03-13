@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+
+</head>
+<body>
+
+
+<div th:replace="fragments :: menu"></div>
+
+<div class="container mt-4">
+	<a th:href="@{/new}" class="btn btn-primary">Nuevo</a>
+	
+
+	
+	<table class="table">
+	 <thead>
+	   <tr>
+	 	<th>ID</th>
+	 	<th> 
+	 		<a th:href="@{'/page/'+${currentPage} + '?sortField=ingresoGasto&sortDir='+ ${reverseSortDir}}">
+	 		Ingreso/Gasto</a>
+	 	</th>
+	 	<th>
+	 	<a th:href="@{'/page/'+${currentPage} + '?sortField=date&sortDir='+ ${reverseSortDir}}">
+	 		Fecha</a>
+	 	</th>
+	 	<th>
+	 	<a th:href="@{'/page/'+${currentPage} + '?sortField=tipo&sortDir='+ ${reverseSortDir}}">
+	 		Tipo</a>
+	 	</th>
+	 	<th>
+	 	<a th:href="@{'/page/'+${currentPage} + '?sortField=subtipo&sortDir='+ ${reverseSortDir}}">
+	 		Subtipo</a>
+	 	</th>
+	 	<th>
+	 	<a th:href="@{'/page/'+${currentPage} + '?sortField=concepto&sortDir='+ ${reverseSortDir}}">
+	 		Concepto</a>
+	 	</th>
+	 	<th>
+	 	<a th:href="@{'/page/'+${currentPage} + '?sortField=valor&sortDir='+ ${reverseSortDir}}">
+	 		Valor</a>
+	 	</th>
+	 	<th>Acciones</th>
+	 	</tr>
+	 </thead>
+	 <tbody>
+	 	<tr th:each="linea : ${lineas}">
+	 		<td th:text="${linea.id}"></td>
+	 		<td th:text="${linea.ingresoGasto}"></td>
+	 		<td th:text="${linea.date}"></td>
+	 		<td th:text="${linea.tipo}"></td>
+	 		<td th:text="${linea.subtipo}"></td>
+	 		<td th:text="${linea.concepto}"></td>
+	 		<td th:text="${linea.valor}"></td>
+	 		<td>
+	 			<a th:href="@{/editar/}+${linea.id}" class="btn btn-warning">Editar</a>
+	 			<a th:onclick="eliminar([[${linea.id}]])" class="btn btn-danger">Eliminar</a>
+	 		</td>
+	 	</tr>
+	 </tbody>
+	</table>
+	
+	<div th:if = "${totalPages > 1}">
+		<div class = "row col-sm-10">
+			<div class="col-sm-2">
+				Total Rows: [[${totalItems}]]
+			</div>
+			<div class="col-sm-1">
+				<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+					<a th:if="${currentPage !=i}" th:href="@{'/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+ ${sortDir}}">[[${i}]]</a>
+					<span th:unless="${currentPage !=i}">[[${i}]]</span> &nbsp; &nbsp;
+				
+				</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' +${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+ ${sortDir}}">Next</a>
+				<span th:unless="${currentPage < totalPages}">Next</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' +${totalPages}+'?sortField='+${sortField}+'&sortDir='+ ${sortDir}}">Last</a>
+				<span th:unless="${currentPage < totalPages}">Last</span>
+			</div>
+		</div>
+	
+	</div>
+
+<script src="/static/selectFilter.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/static/funciones.js"></script>
+</div>
+</body>
+</html>

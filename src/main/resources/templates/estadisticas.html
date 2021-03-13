@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+<div th:replace="fragments :: menu"></div>
+
+<div class="main-content">
+ <div class="container">
+  <div class="row">
+   <div class="col">
+ 	<div class="card border-primary mb-3" style="max-width: 18rem;">
+	  <!-- <div class="card-header">Header</div>  -->
+	  <div class="card-body text-primary">
+	    <h5 class="card-title">Beneficio NETO</h5>
+	    <p class="card-text" th:text="${#numbers.formatDecimal(beneficioNeto, 0, 'COMMA', 2, 'POINT')+' euros'}"></p>
+	  </div>
+   	</div>
+   </div>
+   <div class="col">
+  	<div class="card border-primary mb-3" style="max-width: 18rem;">
+	  <!-- <div class="card-header">Header</div>  -->
+	  <div class="card-body text-primary">
+	    <h5 class="card-title">Ventas Totales</h5>
+	    <!-- Cambiar beneficioNeto por ventasTotales una vez implementado -->
+	    <p class="card-text" th:text="${#numbers.formatDecimal(beneficioNeto, 0, 'COMMA', 2, 'POINT')+' euros'}"></p>
+	  </div>
+   	</div>
+   </div>
+   <div class="col">
+  	column 1 column 3
+   </div>
+  </div>
+  <div class="row">
+	<div class="col">
+	 <div class="card">
+	  <div class="card-body">
+	   <div class="chart">
+	        <canvas id="miGrafico" width="40" height="20"></canvas>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+  </div>
+
+ </div>
+</div>
+
+
+
+
+<script  th:inline="javascript">
+
+	var speedCanvas = document.getElementById("miGrafico");
+	
+	Chart.defaults.global.defaultFontFamily = "Lato";
+	Chart.defaults.global.defaultFontSize = 18;
+	
+
+	
+	var dataIngreso = {
+			label: "ingresos",
+			data: [[${stdIngreso}]],
+			backgroundColor: 'green'
+	};
+	
+	var dataGastos = {
+			label: "gastos",
+			data: [[${stdGasto}]], 
+			backgroundColor: 'red'
+	};
+	
+	var dataJunto = {
+			labels: ['Enero','Febrero','Marzo','Abril','Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre','Octubre', 'Noviembre','Diciembre'],  
+			datasets: [dataIngreso, dataGastos]
+	};
+	
+	var barChart = new Chart(speedCanvas,
+			{
+			  type: 'bar',
+			  data: dataJunto
+			});
+
+
+</script>
+
+	
+
+<script src="selectFilter.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/funciones.js"></script>
+</div>
+</body>
+</html>
