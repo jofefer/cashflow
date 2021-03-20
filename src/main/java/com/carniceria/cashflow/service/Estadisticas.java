@@ -74,4 +74,20 @@ public class Estadisticas implements IEstadisticasService {
 		return ingreso-gasto;
 	}
 	
+	
+	public double ventasTotales() {
+		List<CashFlowLinea> lineas = (List<CashFlowLinea>) this.data.findAll();
+		double ventas = 0;
+		for(CashFlowLinea linea: lineas) {
+			LocalDate date = LocalDate.parse(linea.getDate());
+			if(date.getYear() == date.now().getYear()) {
+				if(linea.getSubtipo().equals("Venta de Productos")) {
+					ventas += linea.getValor();
+				}
+			}
+		
+		}
+		return ventas;
+	}
+	
 }

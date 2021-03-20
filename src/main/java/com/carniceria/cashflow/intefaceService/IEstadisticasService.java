@@ -9,5 +9,6 @@ public interface IEstadisticasService {
 	public double[] ingresosGastosPorMes(String ingresoGasto);
 	public List<Integer> gastosPorMes();
 	public double beneficioNeto();
+	public double ventasTotales();
 	
 }

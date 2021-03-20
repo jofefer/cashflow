@@ -96,7 +96,8 @@ public class CashFlowController {
 	public String mostarEstadisticas(Model model) {
 		double[] estadisticasIngreso = this.estadisticasService.ingresosGastosPorMes("ingreso");
 		double[] estadisticasGasto = this.estadisticasService.ingresosGastosPorMes("gasto");
-
+		
+		model.addAttribute("ingresosTotales", this.estadisticasService.ventasTotales());
 		model.addAttribute("stdIngreso",estadisticasIngreso);
 		model.addAttribute("stdGasto",estadisticasGasto);
 		model.addAttribute("beneficioNeto", this.estadisticasService.beneficioNeto());

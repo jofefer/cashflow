@@ -26,12 +26,18 @@
 	  <div class="card-body text-primary">
 	    <h5 class="card-title">Ventas Totales</h5>
 	    <!-- Cambiar beneficioNeto por ventasTotales una vez implementado -->
-	    <p class="card-text" th:text="${#numbers.formatDecimal(beneficioNeto, 0, 'COMMA', 2, 'POINT')+' euros'}"></p>
+	    <p class="card-text" th:text="${#numbers.formatDecimal(ingresosTotales, 0, 'COMMA', 2, 'POINT')+' euros'}"></p>
 	  </div>
    	</div>
    </div>
    <div class="col">
-  	column 1 column 3
+  	<div class="card border-primary mb-3" style="max-width: 18rem;">
+	  <!-- <div class="card-header">Header</div>  -->
+	  <div class="card-body text-primary">
+	    <h5 class="card-title">% ganancias Netas</h5>
+	    <p class="card-text" th:text="${#numbers.formatDecimal((beneficioNeto/ingresosTotales)*100, 0, 'COMMA', 2, 'POINT')+'%'}"></p>
+	  </div>
+   	</div>
    </div>
   </div>
   <div class="row">
